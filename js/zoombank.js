@@ -9,24 +9,36 @@ enterBtn.addEventListener('click',function(){
 // Deposit Button handler
 let depositBtn=document.getElementById('addDeposit');
 depositBtn.addEventListener('click',function(){
-    let depositAmount=document.getElementById('depositAmount').value;
-    let depositNumber=parseFloat(depositAmount);
-    let currentDeposit=document.getElementById('currentDeposit').innerText;
-    let currentDepositNumber=parseFloat(currentDeposit);
-    let totalDepositAmount=depositNumber+currentDepositNumber;
-    document.getElementById('currentDeposit').innerText=totalDepositAmount;
+    let depositNumber=getInputNumber('depositAmount');
+    // let currentDeposit=document.getElementById('currentDeposit').innerText;
+    // let currentDepositNumber=parseFloat(currentDeposit);
+    // let totalDepositAmount=depositNumber+currentDepositNumber;
+    // document.getElementById('currentDeposit').innerText=totalDepositAmount;
 
-    let currentBalance=document.getElementById('currentBalance').innerText;
-    let currentBalanceNumber=parseFloat(currentBalance);
-    let totalBalance=depositNumber+currentBalanceNumber;
-    document.getElementById('currentBalance').innerText = totalBalance;
-
+    updateSpanText('currentDeposit',depositNumber);
+    updateSpanText('currentBalance',depositNumber);
     document.getElementById('depositAmount').value ="";
 });
+
 // Withdraw Button Event handler
 let withdrawBtn=document.getElementById('addWithdraw');
 withdrawBtn.addEventListener('click',function(){
-    let withdrawAmount=document.get
-    console.log("Some One Click Me")
-    
+    let withdrawNumber=getInputNumber('withdrawAmount');
+    updateSpanText('currentWithdraw',withdrawNumber);
+    updateSpanText('currentBalance', -1 * withdrawNumber);
+    // console.log(withdrawNumber);
+    document.getElementById('withdrawAmount').value="";
 });
+
+let getInputNumber = (id) => {
+    let withdrawAmount=document.getElementById(id).value;
+    let withdrawNumber=parseFloat(withdrawAmount);
+    return withdrawNumber;
+}
+let updateSpanText = (id,depositNumber) => {
+    let currentBalance=document.getElementById(id).innerText;
+    let currentBalanceNumber=parseFloat(currentBalance);
+    let totalBalance=depositNumber+currentBalanceNumber;
+    document.getElementById(id).innerText = totalBalance;
+}
+
